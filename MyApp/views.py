@@ -6,11 +6,12 @@ from django.contrib.auth.hashers import make_password,check_password
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 # Create your views here.
-@login_required
 def index(request):
-    return HttpResponse('home page')
+    return render(request, 'home.html')
 @csrf_exempt
 def user_login(request):
+    if request.session.get('is_login', None):  # 不允许重复登录
+        return redirect('/')
     # 1.获取用户提交的数据
     if request.method == 'POST':
         email = request.POST.get('login_email')
@@ -23,7 +24,10 @@ def user_login(request):
             print(auth_login.email_signup,auth_login.password_signup,end='\n')
             if auth_login.email_signup == email and checkpassword:
                 # 登录成功后重定向到首页
-                return HttpResponse('success')
+                request.session['is_login'] = True  # 往session字典内写入用户状态和数据
+                request.session['email'] = email
+                return redirect("/")
+
             else:
                 # 登录失败后的逻辑，显示错误信息
                 print('test')
@@ -32,7 +36,16 @@ def user_login(request):
             print('error')
             return JsonResponse({'error':True})
     else:
-        return render(request,'index.html')
+        return render(request,'loginAndregister.html')
+
+def logout(request):
+    if not request.session.get('is_login', None):
+        # 如果本来就未登录，也就没有登出一说
+        return redirect("/")
+    request.session.flush()
+
+    return redirect("/")
+
 @csrf_exempt
 def check_username(request):
     if request.method == 'POST':

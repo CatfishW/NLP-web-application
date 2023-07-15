@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block title %}照片处理{% endblock %}
+{% block content %}
+  <style>
+    .container {
+      text-align: center;
+    }
+
+    img.preview-img {
+      width: 400px; /* 设置处理后照片的宽度 */
+      height: auto; /* 根据宽度等比例缩放高度 */
+    }
+
+    img.result-img {
+      width: 400px; /* 设置处理后照片的宽度 */
+      height: auto; /* 根据宽度等比例缩放高度 */
+    }
+  </style>
+
+  <div class="container">
+    <h1>照片展示和处理</h1>
+
+    <input type="file" onchange="handleFiles(this.files)">
+    <div id="preview"></div>
+
+    <button onclick="processPhoto()">处理照片</button>
+
+    <div id="result">
+      <!-- 处理结果图将显示在这里 -->
+    </div>
+
+    <script>
+      function handleFiles(files) {
+        const reader = new FileReader();
+        reader.onload = function () {
+          const preview = document.getElementById('preview');
+          const img = document.createElement('img');
+          img.src = reader.result;
+          img.classList.add('preview-img'); // 添加CSS类名，以应用样式
+          preview.innerHTML = '';
+          preview.appendChild(img);
+        }
+        if (files && files[0]) {
+          reader.readAsDataURL(files[0]);
+        }
+      }
+
+      function processPhoto() {
+		// 登录状态检查
+        {% if request.session.is_login %}
+          // 已登录
+          const userName = "{{ request.session.user_name }}"; // 获取用户名
+
+          // 处理照片的代码
+          // ...
+
+          const result = document.getElementById('result');
+          result.innerHTML = '';
+          const processedImg = document.createElement('img');
+          processedImg.src = 'path/to/processed-photo.jpg';
+          processedImg.classList.add('result-img'); // 添加CSS类名，以应用样式
+          result.appendChild(processedImg);
+        {% else %}
+          // 未登录提示
+          alert('请登录以继续处理照片。');
+        {% endif %}
+      }
+    </script>
+  </div>
+{% endblock %}

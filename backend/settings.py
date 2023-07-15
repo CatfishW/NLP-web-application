@@ -57,8 +57,7 @@ import os
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-
-        'DIRS': [os.path.join(BASE_DIR,'LoginAndRegister')],
+        'DIRS': [os.path.join(BASE_DIR,"templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -82,7 +81,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'blogsystem',
         'USER': 'root',
-        'PASSWORD': '132161366',
+        'PASSWORD': '112233',
         'HOST': '127.0.0.1',  # 默认为 'localhost'
         'PORT': '3306',  # 默认为 '3306'
     }
