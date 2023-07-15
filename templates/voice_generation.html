@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block title %}语音听写{% endblock %}
+
+{% block content %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>语音合成</title>
+    <style>
+        .container{
+        width:48%;float:left
+
+        }
+
+     @media (max-width:500px){
+           .container{
+        width:100%;float:left
+
+        }
+     }
+     .buttons1{
+     margin-right:10%;margin-top:10px;font-size: 20px;padding: 6px 10px;cursor: pointer;background-color: white;color: blue;
+        border: 1px solid #555555;border-radius: 5px;float:left;}
+     .buttons2{
+     margin-right:10%;margin-top:10px;font-size: 20px;padding: 6px 10px;cursor: pointer;background-color: white;color: blue;
+        border: 1px solid #555555;border-radius: 5px;float:right;}
+
+
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div>
+        <h1 style="text-align:center">
+            <img alt="tts" src="../static/images/tts.png" width="120" height="120">
+            语音合成能力演示
+        </h1>
+        <p style="text-align:center">
+            语音合成将文字转化为自然流畅的人声，广泛应用于新闻阅读、出行导航、智能硬件和通知播报等场景。
+        </p>
+    </div>
+</header>
+<br/>
+<br/>
+<br/>
+
+<div class="container">
+
+    <!--输入文本-->
+    <form method="POST">
+        <h2>请输入需要合成的文本</h2>
+        <textarea name="TEXT" placeholder="内容不能为空"
+                  style="font-size: 16px;min-height:80px;min-width:200px;width:90%"
+                  required></textarea>
+        <br/>
+        <input type="submit" value="开始合成" id="submitButton" class="buttons2">
+    </form>
+
+    <br/>
+    <br/>
+
+    <div style="clear:both;"></div>
+
+</div>
+
+<div style="width:48%;float:left"><h2>语音合成结果</h2>
+
+    <div style="border:1px solid #ddd;min-height: 400px;padding: 8px;">
+        {% if result %}
+        <h3>点击播放合成语音</h3>
+        <br/>
+        <p>
+            <audio controls>
+                <source src="../static/{{result}}">
+            </audio>
+        </p>
+        {% endif %}
+        <div style="clear:both;"></div>
+    </div>
+</div>
+
+
+<!--输入文本的JavaScript-->
+<script>
+    document.getElementById("submitButton").addEventListener("click",function(e){
+
+         var text = document.querySelector('textarea').value.trim();
+
+         if(!text){
+               document.querySelector('textarea').value = "";
+               e.preventDefault();
+               return;
+         }
+
+    });
+
+</script>
+
+</body>
+{% endblock %}

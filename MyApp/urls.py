@@ -6,5 +6,6 @@ urlpatterns = [
     path('login/',views.user_login,name = 'login'),
     path('register/',views.register,name='register'),
     path('logout/',views.logout,name='logout'),
-    path('speech_to_text/',views.speech_to_text,name='speech_to_text')
+    path('speech_to_text/',views.speech_to_text,name='speech_to_text'),
+    path('voice_generation/',views.voice_generation,name='voice_generation')
 ]

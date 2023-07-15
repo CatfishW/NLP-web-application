@@ -6,13 +6,16 @@ from django.contrib.auth.hashers import make_password,check_password
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from stt_realtime_api_helper import stt_api_get_result
+from tts_api_helper import tts_api_get_result
 import os
+import time
 # Create your views here.
 # 讯飞开放平台相关信息
 APPID = '5f14f0a0'  # 到控制台语音听写页面获取
 APIKey = '617fc1020aebdd37d3b48adb8bdaf26a'  # 到控制台语音听写页面获取
 APISecret = '1df0512e0ddbffe279927aec1dbdf82d'  # 注意不要与APIkey写反
 text_file = './data.txt'  # 用于存储听写后的文本
+
 def index(request):
     return render(request, 'home.html')
 @csrf_exempt
@@ -101,6 +104,24 @@ def speech_to_text(request):
         text = f.readlines()
     result = {'result':''.join(text)}
     return render(request,'speech_to_text.html',result)
+@csrf_exempt
+def voice_generation(request):
+    if request.method == 'GET':
+        return render(request,'voice_generation.html')
+    print(request.POST)
+    TEXT = request.POST['TEXT']  # 获取页面输入的文本
+    if len(TEXT) == 0:
+        return render(request,'voice_generation.html', {'result': ''})
+    # 此处时间用于音频文件路径的定义，便于页面请求音频文件
+    nowtime = time.strftime("%Y-%m-%d-%H_%M_%S", time.localtime(time.time()))
+    tts_file = './static/' + nowtime + r'text_to_speech.mp3'  # 存储合成语音文件
+    tts_file_post = nowtime + r'text_to_speech.mp3'  # 用于页面请求音频文件地址
+    tts_api_get_result(APPID, APIKey, APISecret, TEXT, tts_file)  # 调用合成模块并将结果保存到音频文件中
+    result = {'result': tts_file_post}
+    return render(request,'voice_generation.html', result)  # 页面请求音频文件
+    
+
+
 
 
 
