@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+
+{% block title %}语音听写{% endblock %}
+
+{% block content %}
+
+
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+
+<head>
+    <meta charset="UTF-8">
+    <title>语音听写</title>
+    <style>
+        .container{
+        width:48%;float:left
+
+        }
+
+     @media (max-width:500px){
+           .container{
+        width:100%;float:left
+
+        }
+     }
+     .buttons1{
+     margin-right:10%;margin-top:20px;font-size: 20px;padding: 6px 10px;cursor: pointer;background-color: white;color: blue;
+        border: 1px solid #555555;border-radius: 5px;float:left;}
+     .buttons2{
+     margin-right:10%;margin-top:20px;font-size: 20px;padding: 6px 10px;cursor: pointer;background-color: white;color: blue;
+        border: 1px solid #555555;border-radius: 5px;float:right;}
+
+
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div>
+        <h1 style="text-align:center">
+            <img alt="tx" src="../static/images/tingxie.png" width="120" height="120">
+            语音听写能力演示
+        </h1>
+        <p style="text-align:center">
+            语音听写是把即时语音(≤60秒)转换成对应的文字信息，支持实时返回识别结果，达到一边上传音频一边获得识别文本的效果。
+            让机器能够“听懂”人类语言，相当于给机器安装上“耳朵”，使其具备“能听”的功能。
+        </p>
+    </div>
+</header>
+<br/>
+<br/>
+<br/>
+
+<div class="container">
+
+    <!--上传文件-->
+    <form method="POST" id="upload" enctype="multipart/form-data">
+        <h2>请选择需要语音听写的mp3音频文件</h2>
+        <br/>
+        <input type="file" name="file" id="pic" accept=".mp3" class="buttons1" required>
+
+        <input type="submit" value="开始识别" onclick="uploadPic()" class="buttons2" >
+        <span class="showUrl"></span>
+        <img src="" class="showPic" alt="">
+    </form>
+
+    <div style="clear:both;"></div>
+
+</div>
+
+<div style="width:48%;float:left"><h2>识别结果</h2>
+
+    <div style="border:1px solid #ddd;min-height: 400px;padding: 8px;">
+        {% if result %}
+        <p style="font-size: 20px ">{{result}}</p>
+        {% endif %}
+    </div>
+
+    <div style="clear:both;"></div>
+
+</div>
+
+<!--上传文件的JavaScript-->
+<script type="text/javascript">
+    function uploadPic() {
+    var fileInput = $("#pic")[0].files[0]; // 获取文件输入框中的文件
+    $.ajax({
+      url: "/",
+      type: "POST",
+      data: fileInput,
+      processData: false,
+      contentType: false,
+      success: function(response) {
+        // Handle the response from the server
+        console.log(response);
+        alert("上传成功！");
+      },
+      error: function(xhr, status, error) {
+        // Handle the error
+        console.error(error);
+      }
+    });
+  };
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // 获取导航栏元素
+    var navItems = document.querySelectorAll(".navbar-nav li");
+
+    // 遍历导航栏元素
+    navItems.forEach(function(item) {
+      if (item.textContent.trim() === "主页") {
+        // 修改主页链接文本和类名
+        item.innerHTML = "<a href='/'>主页</a>";
+        item.classList.remove("inactivate");
+      } else if (item.textContent.trim() === "语音听写") {
+        // 修改语音听写链接文本和类名
+        item.innerHTML = "<a href='/speech_to_text'>语音听写</a>";
+        item.classList.remove("deactivate");
+        item.classList.add("activate");
+      }
+    });
+  });
+</script>
+
+</body>
+{% endblock %}
+

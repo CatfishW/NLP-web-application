@@ -5,5 +5,6 @@ urlpatterns = [
     path('check/',views.check_username,name = 'check_username'),
     path('login/',views.user_login,name = 'login'),
     path('register/',views.register,name='register'),
-    path('logout/',views.logout,name='logout')
+    path('logout/',views.logout,name='logout'),
+    path('speech_to_text/',views.speech_to_text,name='speech_to_text')
 ]
