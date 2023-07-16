@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>语音性别年龄识别</title>
+    <style>
+        .container{
+        width:48%;float:left
+
+        }
+
+     @media (max-width:500px){
+           .container{
+        width:100%;float:left
+
+        }
+     }
+     .buttons1{
+     margin-right:10%;margin-top:20px;font-size: 20px;padding: 6px 10px;cursor: pointer;background-color: white;color: blue;
+        border: 1px solid #555555;border-radius: 5px;float:left;}
+     .buttons2{
+     margin-right:10%;margin-top:20px;font-size: 20px;padding: 6px 10px;cursor: pointer;background-color: white;color: blue;
+        border: 1px solid #555555;border-radius: 5px;float:right;}
+
+
+
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div>
+        <h1 style="text-align:center">
+            <img alt="gar" src="{{url_for('static',filename='images/gar.png')}}" width="120" height="120">
+            语音性别年龄识别能力演示
+        </h1>
+        <p style="text-align:center">
+            语音性别年龄识别是对说话者的年龄大小以及性别属性进行分析，
+            可以通过收到的音频数据判定发音人的性别（男，女）及年龄范围（小孩，中年，老人）。
+        </p>
+    </div>
+</header>
+<br/>
+<br/>
+<br/>
+
+<div class="container">
+
+    <!--上传文件-->
+    <form action="/" method="POST" id="upload" enctype="multipart/form-data">
+        <h2>请选择需要语音性别年龄识别的wav音频文件</h2>
+        <br/>
+        <input type="file" name="file" id="pic" accept=".wav" class="buttons1" required>
+
+        <input type="submit" value="开始识别" onclick="uploadPic()" class="buttons2">
+        <span class="showUrl"></span>
+        <img src="" class="showPic" alt="">
+    </form>
+
+    <div style="clear:both;"></div>
+
+</div>
+
+<div style="width:48%;float:left"><h2>性别年龄识别结果</h2>
+    <div style="border:1px solid #ddd;min-height: 400px;padding: 8px;">
+        {% if age_result %}
+        <ul>
+            <li style="font-size: 20px ">识别出说话人的性别为：{{gender_result}}</li>
+            <br/>
+            <li style="font-size: 20px ">识别出说话人的年龄段为：{{age_result}}</li>
+        </ul>
+        {% endif %}
+    </div>
+    <div style="clear:both;"></div>
+</div>
+
+<!--上传文件的JavaScript-->
+<script type="text/javascript">
+      function uploadPic() {
+        var form = document.getElementById('upload'),
+          formData = new FormData(form);
+         $.ajax({
+            url:"/get_account",
+            type:"post",
+            data:formData,
+            processData:false,
+            contentType:false,
+            success:function(res){
+             if(res){
+              alert("上传成功！");
+             }
+             console.log(res);
+             $("#pic").val("");
+             $(".showUrl").html(res);
+             $(".showPic").attr("src",res);
+            },
+            error:function(err){
+             alert("网络连接失败,稍后重试",err);
+            }
+
+         })
+      }
+
+
+
+</script>
+
+</body>
+</html>

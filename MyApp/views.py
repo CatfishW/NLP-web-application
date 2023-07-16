@@ -8,6 +8,7 @@ from django.http import JsonResponse
 from stt_realtime_api_helper import stt_api_get_result
 from tts_api_helper import tts_api_get_result
 from song_rec_api_helper import song_rec_get_result
+from age_gender_api_helper import age_gender_api_get_result
 import os
 import time
 # 讯飞开放平台相关信息
