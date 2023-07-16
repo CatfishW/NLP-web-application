@@ -7,97 +7,272 @@
 <head>
     <meta charset="UTF-8">
     <title>语音合成</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/test.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/test2.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/test3.css">
+
+
     <style>
-        .container{
-        width:48%;float:left
-
+        body {
+    background-color: rgb(249, 250, 255);
+  }
+        .container {
+            width: 48%;
+            float: left
         }
 
-     @media (max-width:500px){
-           .container{
-        width:100%;float:left
-
+        @media (max-width:500px) {
+            .container {
+                width: 100%;
+                float: left
+            }
         }
-     }
-     .buttons1{
-     margin-right:10%;margin-top:10px;font-size: 20px;padding: 6px 10px;cursor: pointer;background-color: white;color: blue;
-        border: 1px solid #555555;border-radius: 5px;float:left;}
-     .buttons2{
-     margin-right:10%;margin-top:10px;font-size: 20px;padding: 6px 10px;cursor: pointer;background-color: white;color: blue;
-        border: 1px solid #555555;border-radius: 5px;float:right;}
 
+        .buttons1 {
+            margin-right: 10%;
+            margin-top: 10px;
+            font-size: 20px;
+            padding: 6px 10px;
+            cursor: pointer;
+            background-color: white;
+            color: blue;
+            border: 1px solid #555555;
+            border-radius: 5px;
+            float: left;
+        }
 
+        .buttons2 {
+            margin-right: 10%;
+            margin-top: 10px;
+            font-size: 20px;
+            padding: 6px 10px;
+            cursor: pointer;
+            background-color: white;
+            color: blue;
+            border: 1px solid #555555;
+            border-radius: 5px;
+            float: right;
+        }
+
+        .section-scene-tab .scene-tab {
+            background-color: #ffffff;
+            border: 1px solid #e6e8f4
+        }
+
+        .container2 {
+            width: 100%;
+            float: left;
+            margin-top: -50px;
+        }
+
+        .file-zys {
+            display: block;
+            margin: 0 auto;
+            height: 40px;
+            width: 160px;
+            display: flex;
+            justify-content: center;
+            /* 水平居中 */
+            align-items: center;
+            /* 垂直居中 */
+            text-align: justify;
+            margin-bottom: 20px;
+            font-family: "Microsoft YaHei", sans-serif;
+            /* 首选字体为微软雅黑，如果系统不支持，则使用 sans-serif 作为备选字体 */
+            font-weight: bold;
+            /* 加粗 */
+        }
+
+        .file-zys2 {
+            display: block;
+            margin: 0 auto;
+            height: 40px;
+            width: 160px;
+            display: flex;
+            justify-content: center;
+            /* 水平居中 */
+            align-items: center;
+            /* 垂直居中 */
+            text-align: justify;
+            font-family: "Microsoft YaHei", sans-serif;
+            /* 首选字体为微软雅黑，如果系统不支持，则使用 sans-serif 作为备选字体 */
+            font-weight: bold;
+            /* 加粗 */
+            margin-top: 4px;
+        }
+
+        .demo-iat .demo-content .taste-button:hover {
+            background: #0b99ff
+        }
     </style>
 </head>
 
 <body>
 
-<header>
+    <header>
+        <div>
+            <h1 style="text-align:center">
+                <img alt="tts" src="../static/images/tts.png" width="120" height="120">
+                语音合成能力演示
+            </h1>
+            <p style="text-align:center">
+                语音合成将文字转化为自然流畅的人声，广泛应用于新闻阅读、出行导航、智能硬件和通知播报等场景。
+            </p>
+        </div>
+    </header>
+    <h2 class="section-title">
+        <span>
+          产品体验
+        </span>
+      </h2>
     <div>
-        <h1 style="text-align:center">
-            <img alt="tts" src="../static/images/tts.png" width="120" height="120">
-            语音合成能力演示
-        </h1>
-        <p style="text-align:center">
-            语音合成将文字转化为自然流畅的人声，广泛应用于新闻阅读、出行导航、智能硬件和通知播报等场景。
-        </p>
+        <div class="container">
+            <!--输入文本-->
+            <form method="POST">
+                <h2 style="font-size: 18px;font-weight: bold;">请输入需要合成的文本</h2>
+                <textarea name="TEXT" placeholder="内容不能为空"
+                    style="font-size: 16px;min-height:228px;min-width:250px;width:90%" required></textarea>
+                <br />
+                <!-- <input type="submit" value="开始合成" id="submitButton" class="buttons2"> -->
+                <div class="service-item-demo demo-iat">
+                    <div class="demo-content">
+                        <div class="start-taste flex-display-1">
+                            <div class="start-taste-button">
+                                <input id="anotherBtn" type="submit" value="开&nbsp;始&nbsp;识&nbsp;别"
+                                    onclick="uploadPic()" class="file-zys2 taste-button taste-ml160"
+                                    style=" font-size:14px;margin-left:220px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <br />
+            <br />
+            <div style="clear:both;"></div>
+
+        </div>
+
+        <div style="width:48%;float:left">
+            <h2 style="font-size: 18px;font-weight: bold;">语音合成结果</h2>
+
+            <div style="border:1px solid #ddd;min-height: 230px;padding: 8px;">
+                {% if result %}
+                <h3>点击播放合成语音</h3>
+                <br />
+                <p>
+                    <audio controls>
+                        <source src="../static/{{result}}">
+                    </audio>
+                </p>
+                {% endif %}
+                <div style="clear:both;"></div>
+            </div>
+        </div>
     </div>
-</header>
-<br/>
-<br/>
-<br/>
-
-<div class="container">
-
-    <!--输入文本-->
-    <form method="POST">
-        <h2>请输入需要合成的文本</h2>
-        <textarea name="TEXT" placeholder="内容不能为空"
-                  style="font-size: 16px;min-height:80px;min-width:200px;width:90%"
-                  required></textarea>
-        <br/>
-        <input type="submit" value="开始合成" id="submitButton" class="buttons2">
-    </form>
-
-    <br/>
-    <br/>
-
-    <div style="clear:both;"></div>
-
-</div>
-
-<div style="width:48%;float:left"><h2>语音合成结果</h2>
-
-    <div style="border:1px solid #ddd;min-height: 400px;padding: 8px;">
-        {% if result %}
-        <h3>点击播放合成语音</h3>
-        <br/>
-        <p>
-            <audio controls>
-                <source src="../static/{{result}}">
-            </audio>
-        </p>
-        {% endif %}
-        <div style="clear:both;"></div>
-    </div>
-</div>
 
 
-<!--输入文本的JavaScript-->
-<script>
-    document.getElementById("submitButton").addEventListener("click",function(e){
 
-         var text = document.querySelector('textarea').value.trim();
 
-         if(!text){
-               document.querySelector('textarea').value = "";
-               e.preventDefault();
-               return;
-         }
 
-    });
 
-</script>
+
+
+
+    <section id="anchor695585" class="section-advantage">
+        <div class="container2">
+            <h2 class="section-title"><span>功能优势</span></h2>
+            <div class="card-list gaia-row">
+                <div class="gaia-col-3 gaia-col-sm-1"><a href="" target="_blank" rel="noreferrer"
+                        style="text-decoration:none;cursor:default;pointer-events:none" i_l_d_20180504="t">
+                        <div class="gaia-card advantage-card">
+                            <div class="advantage-card__head"><img
+                                    src="https://aixfyun-cn-bj.xfyun.cn/aixfyun/1597327560000/先进的语音技术.png">
+                                <div class="title">真实自然，专业实力</div>
+                            </div>
+                            <div class="advantage-card__body">专注语音很多年，技术实力雄厚；人声自然饱满，逼真度高，富有表现力，人机交互更具真实感
+                            </div>
+                        </div>
+                    </a></div>
+                <div class="gaia-col-3 gaia-col-sm-1"><a href="" target="_blank" rel="noreferrer"
+                        style="text-decoration:none;cursor:default;pointer-events:none" i_l_d_20180504="t">
+                        <div class="gaia-card advantage-card">
+                            <div class="advantage-card__head"><img
+                                    src="https://aixfyun-cn-bj.xfyun.cn/aixfyun/1597327569000/自然清晰的语音体验.png">
+                                <div class="title">多方言，多语种</div>
+                            </div>
+                            <div class="advantage-card__body">支持多种语种，支持中英混合自然合成
+                            </div>
+                        </div>
+                    </a></div>
+                <div class="gaia-col-3 gaia-col-sm-1"><a href="" target="_blank" rel="noreferrer"
+                        style="text-decoration:none;cursor:default;pointer-events:none" i_l_d_20180504="t">
+                        <div class="gaia-card advantage-card">
+                            <div class="advantage-card__head"><img
+                                    src="https://aixfyun-cn-bj.xfyun.cn/aixfyun/1597327575000/精巧的语音服务.png">
+                                <div class="title">方便快捷，高效合成</div>
+                            </div>
+                            <div class="advantage-card__body">合成速度极快，需要1秒即可从语音中获取文本信息</div>
+                        </div>
+                    </a></div>
+                <!-- <div class="gaia-col-3 gaia-col-sm-1"><a href="" target="_blank" rel="noreferrer"
+                        style="text-decoration:none;cursor:default;pointer-events:none" i_l_d_20180504="t">
+                        <div class="gaia-card advantage-card">
+                            <div class="advantage-card__head"><img
+                                    src="https://aixfyun-cn-bj.xfyun.cn/aixfyun/1597384649000/复杂场景支持.png">
+                                <div class="title">多场景，多风格</div>
+                            </div>
+                            <div class="advantage-card__body">6大场景，100+发音人，男女老少，海量风格随心选</div>
+                        </div>
+                    </a></div> -->
+                <!-- <div class="gaia-col-3 gaia-col-sm-1"><a href="" target="_blank" rel="noreferrer"
+                        style="text-decoration:none;cursor:default;pointer-events:none" i_l_d_20180504="t">
+                        <div class="gaia-card advantage-card">
+                            <div class="advantage-card__head"><img
+                                    src="https://aixfyun-cn-bj.xfyun.cn/aixfyun/1597385060000/矢量智能对象.png">
+                                <div class="title">动态调参，自由配置</div>
+                            </div>
+                            <div class="advantage-card__body">随心调节语调/语速/音量等参数，满足复杂场景需求</div>
+                        </div>
+                    </a></div> -->
+                <!-- <div class="gaia-col-3 gaia-col-sm-1"><a href="" target="_blank" rel="noreferrer"
+                        style="text-decoration:none;cursor:default;pointer-events:none" i_l_d_20180504="t">
+                        <div class="gaia-card advantage-card">
+                            <div class="advantage-card__head"><img
+                                    src="https://aixfyun-cn-bj.xfyun.cn/aixfyun/1597327564000/专属的语音个性定制.png">
+                                <div class="title">定制音库，专属声音</div>
+                            </div>
+                            <div class="advantage-card__body">15分钟简短录音，深度定制，个性化定制声线，打造品牌标识</div>
+                        </div>
+                    </a></div> -->
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+    <!--输入文本的JavaScript-->
+    <script>
+        document.getElementById("submitButton").addEventListener("click", function (e) {
+
+            var text = document.querySelector('textarea').value.trim();
+
+            if (!text) {
+                document.querySelector('textarea').value = "";
+                e.preventDefault();
+                return;
+            }
+
+        });
+
+    </script>
 
 </body>
 {% endblock %}
