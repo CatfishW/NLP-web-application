@@ -8,121 +8,507 @@
 <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 
 <head>
-    <meta charset="UTF-8">
-    <title>语音听写</title>
-    <style>
-        .container{
-        width:48%;float:left
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="../static/css/test.css">
+  <link rel="stylesheet" type="text/css" href="../static/css/test2.css">
 
-        }
-
-     @media (max-width:500px){
-           .container{
-        width:100%;float:left
-
-        }
-     }
-     .buttons1{
-     margin-right:10%;margin-top:20px;font-size: 20px;padding: 6px 10px;cursor: pointer;background-color: white;color: blue;
-        border: 1px solid #555555;border-radius: 5px;float:left;}
-     .buttons2{
-     margin-right:10%;margin-top:20px;font-size: 20px;padding: 6px 10px;cursor: pointer;background-color: white;color: blue;
-        border: 1px solid #555555;border-radius: 5px;float:right;}
+  <title>语音听写</title>
+  <style>
 
 
-    </style>
+
+.modal {
+  display: none; /* 默认隐藏 */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5); /* 半透明背景 */
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  width: 60%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.close {
+  float: right;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+h2 {
+  margin-top: 0;
+}
+
+
+
+
+
+
+    body {
+    background-color: rgb(249, 250, 255);
+  }
+
+    .container1 {
+      width: 100%;
+      float: left;
+      margin-top: -50px;
+    }
+    .container2 {
+      width: 100%;
+      float: left;
+      margin-top: 50px;
+    }
+    .container3 {
+      width: 100%;
+      float: left;
+      margin-top: -50px;
+    }
+
+    @media (max-width:500px) {
+      .container {
+        width: 100%;
+        float: left
+      }
+    }
+
+    .buttons1 {
+      margin-right: 10%;
+      margin-top: 20px;
+      font-size: 20px;
+      padding: 6px 10px;
+      cursor: pointer;
+      background-color: white;
+      color: blue;
+      border: 1px solid #555555;
+      border-radius: 5px;
+      float: left;
+    }
+
+    .buttons2 {
+      margin-right: 10%;
+      margin-top: 20px;
+      font-size: 20px;
+      padding: 6px 10px;
+      cursor: pointer;
+      background-color: white;
+      color: blue;
+      border: 1px solid #555555;
+      border-radius: 5px;
+      float: right;
+    }
+
+    .buttons3 {
+      margin-right: 20%;
+      margin-top: 20px;
+      font-size: 20px;
+      padding: 6px 10px;
+      cursor: pointer;
+      border-radius: 5px;
+      float: right;
+    }
+
+    .buttons4 {
+      margin-left: 15%;
+      margin-top: 20px;
+      font-size: 20px;
+      padding: 6px 10px;
+      cursor: pointer;
+      border-radius: 5px;
+      float: left
+    }
+
+
+    /* 选择文件 */
+    .file-upload {
+      position: relative;
+      /* display: inline-block; */
+      display: block;
+    }
+
+    .file-input {
+      position: absolute;
+      left: -9999px;
+      display: block;
+    }
+    .file-zys{
+      display: block;
+      margin: 0 auto;
+    height: 40px;
+    width: 160px;
+    display: flex;
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+  text-align: justify;
+  margin-bottom: 20px;
+  font-family: "Microsoft YaHei", sans-serif; /* 首选字体为微软雅黑，如果系统不支持，则使用 sans-serif 作为备选字体 */
+  font-weight: bold; /* 加粗 */
+    }
+    .file-zys2{
+      display: block;
+      margin: 0 auto;
+    height: 40px;
+    width: 160px;
+    display: flex;
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+  text-align: justify;
+  font-family: "Microsoft YaHei", sans-serif; /* 首选字体为微软雅黑，如果系统不支持，则使用 sans-serif 作为备选字体 */
+  font-weight: bold; /* 加粗 */
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
+  <header>
     <div>
-        <h1 style="text-align:center">
-            <img alt="tx" src="../static/images/tingxie.png" width="120" height="120">
-            语音听写能力演示
-        </h1>
-        <p style="text-align:center">
-            语音听写是把即时语音(≤60秒)转换成对应的文字信息，支持实时返回识别结果，达到一边上传音频一边获得识别文本的效果。
-            让机器能够“听懂”人类语言，相当于给机器安装上“耳朵”，使其具备“能听”的功能。
-        </p>
+      <h1 style="text-align:center">
+        <img alt="tx" src="../static/images/tingxie.png" width="15%" height="15%">
+        语音听写能力演示
+      </h1>
+      <p style="text-align:center">
+        语音听写是把即时语音(≤60秒)转换成对应的文字信息，支持实时返回识别结果，达到一边上传音频一边获得识别文本的效果。
+        让机器能够“听懂”人类语言，相当于给机器安装上“耳朵”，使其具备“能听”的功能。
+      </p>
     </div>
-</header>
-<br/>
-<br/>
-<br/>
+  </header>
+  <!-- <br />
+  <br />
+  <br /> -->
 
-<div class="container">
 
+
+
+
+
+
+
+  <!-- zys -->
+  <div class="container3">
+    <h2 class="section-title"><span>应用场景</span></h2>
+    <div class="card-list gaia-row">
+      <div class="gaia-col-5 gaia-col-sm-2"><a href="" target="_blank" rel="noreferrer"
+          style="text-decoration:none;cursor:default;pointer-events:none" i_l_d_20180504="t">
+          <div class="gaia-card advantage-card style2">
+            <div class="advantage-card__head"><img
+                src="https://aixfyun-cn-bj.xfyun.cn/aixfyun/1619609022000/1111111111111.png">
+              <div class="title">电话销售&amp;客服</div>
+            </div>
+            <div class="advantage-card__body">将坐席大量录音文件转成文字，帮助电话质检和信息同步，也为数据挖掘提供原料基础</div>
+          </div>
+        </a></div>
+      <div class="gaia-col-5 gaia-col-sm-2"><a href="" target="_blank" rel="noreferrer"
+          style="text-decoration:none;cursor:default;pointer-events:none" i_l_d_20180504="t">
+          <div class="gaia-card advantage-card style2">
+            <div class="advantage-card__head"><img
+                src="https://aixfyun-cn-bj.xfyun.cn/aixfyun/1619597922000/0000002.png">
+              <div class="title">会议&amp;访谈记录</div>
+            </div>
+            <div class="advantage-card__body">将会议和访谈的音频转换成文字存稿，让后期的信息检索和整理更方便快捷</div>
+          </div>
+        </a></div>
+      <div class="gaia-col-5 gaia-col-sm-2"><a href="" target="_blank" rel="noreferrer"
+          style="text-decoration:none;cursor:default;pointer-events:none" i_l_d_20180504="t">
+          <div class="gaia-card advantage-card style2">
+            <div class="advantage-card__head"><img src="https://aixfyun-cn-bj.xfyun.cn/aixfyun/1619609041000/字幕.png">
+              <div id="zystarget" class="title">字幕生成</div>
+            </div>
+            <div class="advantage-card__body">将视频中的音频进行语音识别并标记时间戳，生成对应字幕，提升配置字幕效率</div>
+          </div>
+        </a></div>
+      <div class="gaia-col-5 gaia-col-sm-2"><a href="" target="_blank" rel="noreferrer"
+          style="text-decoration:none;cursor:default;pointer-events:none" i_l_d_20180504="t">
+          <div class="gaia-card advantage-card style2">
+            <div class="advantage-card__head"><img
+                src="https://aixfyun-cn-bj.xfyun.cn/aixfyun/1619597935000/0000004.png">
+              <div class="title">语音质检</div>
+            </div>
+            <div class="advantage-card__body">可以从转写出的文字结果中搜索匹配相关词类，对黄暴/涉政内容进行高效鉴别</div>
+          </div>
+        </a></div>
+      <div class="gaia-col-5 gaia-col-sm-2"><a href="" target="_blank" rel="noreferrer"
+          style="text-decoration:none;cursor:default;pointer-events:none" i_l_d_20180504="t">
+          <div class="gaia-card advantage-card style2">
+            <div class="advantage-card__head"><img
+                src="https://aixfyun-cn-bj.xfyun.cn/aixfyun/1619597941000/0000005.png">
+              <div class="title">课堂录音分析</div>
+            </div>
+            <div class="advantage-card__body">批量识别课堂录音文件，返回文本内容，快速分析教学内容，提升教学质量</div>
+          </div>
+        </a></div>
+    </div>
+  </div>
+
+
+
+
+
+
+<!-- zys -->
+  <div class="container1">
     <!--上传文件-->
     <form method="POST" id="upload" enctype="multipart/form-data">
-        <h2>请选择需要语音听写的mp3音频文件</h2>
-        <br/>
-        <input type="file" name="file" id="pic" accept=".mp3" class="buttons1" required>
+      <div class="container">
+        <h2 class="section-title">
+          <span>
+            产品体验
+          </span>
+        </h2>
+        <div class="service-item-demo demo-iat">
+          <div class="demo-content">
+            <div class="taste-left">
+              <div class="taste-left-header">语音输入</div>
+              <div class="taste-left-body">
+                <div class="ex-speaker-scene">
+                  <div class="language-list-ul" style="display: none;">
+                    <div class="language-list-ul-div"></div>
+                    <ul class="language-list" style="display: flex;"></ul>
+                  </div>
+                </div>
+                <div class="language-image-box" style="display: none;">
+                  <div class="taste-content" style="display: none;">
+                    <button class="taste-button ready-button file-zys" type="button"id="taste_button">开始识别</button>
+                  </div>
+                  <div class="language-p">
+                    <p>点击“开始识别”开始录音，请对我说你想说的话，我可以识别你说的内容哦~</p>
+                    <p>请允许浏览器获取麦克风权限</p>
+                  </div>
+                </div>
+                <div class="start-taste flex-display-1">
+                  <div class="start-taste-left">
+                    <div class="time-box" style="display: none;"><span class="start-taste-line">
+                        <hr class="hr1">
+                        <hr class="hr2">
+                        <hr class="hr3">
+                        <hr class="hr4">
+                        <hr class="hr5">
+                        <hr class="hr6">
+                        <hr class="hr7">
+                        <hr class="hr8">
+                        <hr class="hr9">
+                        <hr class="hr10">
+                      </span><span class="total-time"><span class="used-time">00: 00</span><span>/ 01: 00</span></span>
+                    </div>
+                    <div class="start-taste-button">
+                      <!-- zys -->
+                      <input onchange="handleFileSelect(event)" type="file" onclick="activate1" name="file" id="pic" accept=".mp3" class="file-input" />
+                      <label for="pic" class="file-zys taste-button taste-ml160">选&nbsp;择&nbsp;文&nbsp;件</label>
 
-        <input type="submit" value="开始识别" onclick="uploadPic()" class="buttons2" >
-        <span class="showUrl"></span>
-        <img src="" class="showPic" alt="">
+                      <!-- <input type="file" name="file" id="pic" accept=".mp3" class="buttons1" required> -->
+
+                      <input id="anotherBtn" disabled type="submit" value="开&nbsp;始&nbsp;识&nbsp;别" onclick="uploadPic()" class="file-zys2 taste-button taste-ml160" style=" font-size:14px" >
+                      <span class="showUrl"></span>
+                      <img src="" class="showPic" alt="">
+
+
+                      <!-- <button class="taste-button start-button taste-ml160" type="button">开始识别</button> -->
+
+                      <div class="language-p">
+                        <p >点击“选择文件”，可选取对应的.mp3格式的音频文件</p>
+                        <p style="margin-bottom: 90px;">点击“开始识别”，即可完成语音识别分析”</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="modal">
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>上传成功</h2>
+                <!-- <p>上传成功</p> -->
+              </div>
+            </div>
+
+            <div class="taste-right">
+              <div class="taste-right-header">识别结果</div>
+              <!-- <div class="taste-right-body" id="result_output"></div> -->
+                
+              <div  style="border:1px solid #f2f2f2;;min-height: 304px;width:500px;padding: 8px;background-color: #fff;">
+                {% if result %}
+                <p style="font-size: 20px ">{{result}}</p>
+                {% endif %}
+
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </form>
+  </div>
 
-    <div style="clear:both;"></div>
 
-</div>
 
-<div style="width:48%;float:left"><h2>识别结果</h2>
 
-    <div style="border:1px solid #ddd;min-height: 400px;padding: 8px;">
-        {% if result %}
-        <p style="font-size: 20px ">{{result}}</p>
-        {% endif %}
+
+
+
+
+
+
+
+
+  <div class="container2">
+    <h2 class="section-title"><span>产品优势</span></h2>
+    <div class="card-list gaia-row">
+      <div class="gaia-col-2 gaia-col-sm-1">
+        <div class="gaia-card developer-resource-card">
+          <div class="developer-resource-card__head"><img width="30" height="30"
+              src="https://aixfyun-cn-bj.xfyun.cn/aixfyun/1597327560000/先进的语音技术.png">
+            <div class="title">准确率高，高效稳定</div>
+          </div>
+          <div class="developer-resource-card__body">
+            <div class="desc">行业先进的语音识别技术，通用语音识别率98%（注：安徽电子产品监督检验所检测，报告编号151209010027）</div>
+          </div>
+          <div class="developer-resource-card__footer"></div>
+        </div>
+      </div>
+      <div class="gaia-col-2 gaia-col-sm-1">
+        <div class="gaia-card developer-resource-card">
+          <div class="developer-resource-card__head"><img width="30" height="30"
+              src="https://aixfyun-cn-bj.xfyun.cn/aixfyun/1597327569000/自然清晰的语音体验.png">
+            <div class="title">自定义个性热词、质检关键词</div>
+          </div>
+          <div class="developer-resource-card__body">
+            <div class="desc">无需算法开发，直接上传热词列表即可完成热词配置；质检关键词支持配置默认词库和上传自定义词库，满足您的多样化需求</div>
+          </div>
+          <div class="developer-resource-card__footer"></div>
+        </div>
+      </div>
+      <div class="gaia-col-2 gaia-col-sm-1">
+        <div class="gaia-card developer-resource-card">
+          <div class="developer-resource-card__head"><img width="30" height="30"
+              src="https://aixfyun-cn-bj.xfyun.cn/aixfyun/1597327575000/精巧的语音服务.png">
+            <div class="title">格式转化，标点预测</div>
+          </div>
+          <div class="developer-resource-card__body">
+            <div class="desc">对数字、日期、时间等返回格式化文本，根据对话语境，智能断句并匹配标点
+            </div>
+          </div>
+          <div class="developer-resource-card__footer"></div>
+        </div>
+      </div>
+      <div class="gaia-col-2 gaia-col-sm-1">
+        <div class="gaia-card developer-resource-card">
+          <div class="developer-resource-card__head"><img width="30" height="30"
+              src="https://aixfyun-cn-bj.xfyun.cn/aixfyun/1597384649000/复杂场景支持.png">
+            <div class="title">方言语种，高效识别</div>
+          </div>
+          <div class="developer-resource-card__body">
+            <div class="desc">支持除中英文外的多方言语种识别，适应复杂的语言环境</div>
+          </div>
+          <div class="developer-resource-card__footer"></div>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <div style="clear:both;"></div>
 
-</div>
 
-<!--上传文件的JavaScript-->
-<script type="text/javascript">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!--上传文件的JavaScript-->
+  <script type="text/javascript">
     function uploadPic() {
-    var fileInput = $("#pic")[0].files[0]; // 获取文件输入框中的文件
-    $.ajax({
-      url: "/",
-      type: "POST",
-      data: fileInput,
-      processData: false,
-      contentType: false,
-      success: function(response) {
-        // Handle the response from the server
-        console.log(response);
-        alert("上传成功！");
-      },
-      error: function(xhr, status, error) {
-        // Handle the error
-        console.error(error);
-      }
-    });
-  };
-</script>
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    // 获取导航栏元素
-    var navItems = document.querySelectorAll(".navbar-nav li");
+      var fileInput = $("#pic")[0].files[0]; // 获取文件输入框中的文件
+      $.ajax({
+        url: "/",
+        type: "POST",
+        data: fileInput,
+        processData: false,
+        contentType: false,     
+        success: function (response) {
+          // Handle the response from the server
+          console.log(response);
+          // alert("上传成功！");
+          document.querySelector('.modal').classList.add('show');
+          setTimeout(function() {
+          document.querySelector('.modal').classList.remove('show');
+        }, 15000);
+        // location.reload(); // 刷新页面
+        // location.hash = "#zystarget"; // 设置要跳转的位置的片段标识符
+        },
+        
+        error: function (xhr, status, error) {
+          // Handle the error
+          console.error(error);
+        }
+      });
+    };
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // 获取导航栏元素
+      var navItems = document.querySelectorAll(".navbar-nav li");
 
-    // 遍历导航栏元素
-    navItems.forEach(function(item) {
-      if (item.textContent.trim() === "主页") {
-        // 修改主页链接文本和类名
-        item.innerHTML = "<a href='/'>主页</a>";
-        item.classList.remove("inactivate");
-      } else if (item.textContent.trim() === "语音听写") {
-        // 修改语音听写链接文本和类名
-        item.innerHTML = "<a href='/speech_to_text'>语音听写</a>";
-        item.classList.remove("deactivate");
-        item.classList.add("activate");
-      }
+      // 遍历导航栏元素
+      navItems.forEach(function (item) {
+        if (item.textContent.trim() === "主页") {
+          // 修改主页链接文本和类名
+          item.innerHTML = "<a href='/'>主页</a>";
+          item.classList.remove("inactivate");
+        } else if (item.textContent.trim() === "语音听写") {
+          // 修改语音听写链接文本和类名
+          item.innerHTML = "<a href='/speech_to_text'>语音听写</a>";
+          item.classList.remove("deactivate");
+          item.classList.add("activate");
+        }
+      });
     });
+
+    document.addEventListener("DOMContentLoaded", function() {
+    location.hash = "zystarget"
+    if (location.hash) {
+      var targetElement = document.querySelector(location.hash);
+      if (targetElement) {
+        targetElement.scrollIntoView();
+      }
+    }
   });
-</script>
+
+
+
+  function handleFileSelect(event) {
+  var fileInput = event.target;
+  var startBtn = document.getElementById("anotherBtn");
+
+  if (fileInput.files && fileInput.files.length > 0) {
+    // 选择了文件，启用识别按钮
+    startBtn.disabled = false;
+  } else {
+    // 没有选择文件，禁用识别按钮
+    startBtn.disabled = true;
+  }
+}
+
+
+
+  
+  </script>
 
 </body>
 {% endblock %}
-
