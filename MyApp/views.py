@@ -13,10 +13,12 @@ import os
 import time
 # 讯飞开放平台相关信息
 APPID = '5f14f0a0'  
-APIKey = '617fc1020aebdd37d3b48adb8bdaf26a'  
+APIKey = '617fc1020aebdd37d3b48adb8bdaf26a'
+APPID_song = 'de8664cb'
+APIKey_song = '67fba7dd895ff088fcb67c584b3c5a95'  
 APISecret = '1df0512e0ddbffe279927aec1dbdf82d'  
 text_file = './data.txt'  # 用于存储听写后的文本
-APIKey_song_recognition = "4c66ea6f38104e88cb50b4d7e0f73c92"  # 开放平台接口秘钥，到控制台语音扩展歌曲识别页面获取
+
 url = "http://webqbh.xfyun.cn/v1/service/v1/qbh"  # 歌曲识别接口地址
 age_label = {'0': '中年(12~40岁)', '1': '儿童（0~12岁）', '2': '老年（40岁以上）'}
 gender_label = {'0': '女性', '1': '男性'}
@@ -136,9 +138,9 @@ def song_recognition(request):
     if not file:
         return render(request,'song_recognition.html')
     else:
-        srclass = song_rec_get_result(url, APPID, APIKey_song_recognition, file_path)  # 歌曲识别接口调用模块
+        srclass = song_rec_get_result(url, APPID_song, APIKey_song, file_path)  # 歌曲识别接口调用模块
         result = srclass.call_url()  # 获取歌曲识别结果及结果解析
-        result = {'result': result}
+        result = {'result': result[0]}
         print(result)
         return render(request,'song_recognition.html', result)
 @csrf_exempt
