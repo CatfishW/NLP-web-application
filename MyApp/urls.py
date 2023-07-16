@@ -8,5 +8,6 @@ urlpatterns = [
     path('logout/',views.logout,name='logout'),
     path('speech_to_text/',views.speech_to_text,name='speech_to_text'),
     path('voice_generation/',views.voice_generation,name='voice_generation'),
-    path('song_recognition/',views.song_recognition,name='song_recognition')
+    path('song_recognition/',views.song_recognition,name='song_recognition'),
+    path('age_gender_recognition/',views.age_gender_recognition,name='age_gender_recognition')
 ]

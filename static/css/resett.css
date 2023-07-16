@@ -1,0 +1,76 @@
+@charset "utf-8";
+
+/* 重置样式表 */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+/* 统一页面文本 */
+
+body {
+    font-size: 16px;
+    font-family: "微软雅黑";
+}
+
+
+/* 清除列表符号 */
+
+ul,
+ol,
+li {
+    list-style: none;
+}
+
+
+/* 清除下划线 */
+
+u,
+a {
+    text-decoration: none;
+}
+
+
+/* 清除倾斜 */
+
+i,
+em {
+    font-style: normal;
+}
+
+
+/* 清除加粗 */
+
+b,
+strong {
+    font-weight: normal;
+}
+
+
+/* 清除文本默认大小和加粗 */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: 16px;
+    font-weight: normal;
+}
+
+
+/* 边框清零 */
+
+img {
+    border: none;
+}
+
+
+/* 清除聚焦时候的边框 */
+
+input {
+    outline: none;
+}

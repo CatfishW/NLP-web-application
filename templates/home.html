@@ -2,21 +2,219 @@
 {% block title %}语音处理系列{% endblock %}
 {% block content %}
 
-  <style>
-    .container {
-      text-align: center;
-    }
 
-    img.preview-img {
-      width: 400px; /* 设置处理后照片的宽度 */
-      height: auto; /* 根据宽度等比例缩放高度 */
-    }
+<head>
+    <meta charset="UTF-8">
+<!--控制网页的编码格式 utf-8 国际性编码-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--控制视口比例以及缩放-->
+    <title>首页</title>
+    <!-- 先引入重置样式表和公共样式表以及主页样式表 -->
+    <link rel="stylesheet" href="static/css/reset.css">
+    <link rel="stylesheet" href="static/css/public.css">
+    <link rel="stylesheet" href="static/css/index.css">
+ <!-- 这个顺序引入更规范 -->
 
-    img.result-img {
-      width: 400px; /* 设置处理后照片的宽度 */
-      height: auto; /* 根据宽度等比例缩放高度 */
-    }
-  </style>
+</head>
+
+<body>
+    <!-- 创建外部展示容器 -->
+	<div class="banner-container">
+		<!-- 创建图片存储容器 -->
+		<div class="banner-img-container">
+            <a href="/speech_to_text/"><img src="static/images/t1.png"></a>
+           <a href="/speech_to_text/"><img src="static/images/t2.jpg"></a>
+           <a href="/speech_to_text/"><img src="static/images/t3.jpg"></a>
+		</div>
+	</div>
+<!--功能显示-->
+    <div class="fun_con">
+        <h3>主要功能</h3>
+        <div class="fun_box">
+            <dl>
+                <dt><a href="/speech_to_text/"><img src="static/images/tingxie.png"></a></dt>
+                <dd>语音听写</dd>
+            </dl>
+            <dl>
+                <dt><a href="/voice_generation/"><img src="static/images/tts.png" alt=""></a></dt>
+                <dd>语音合成</dd>
+            </dl>
+            <dl>
+                <dt><img src="static/images/case1_05.jpg" alt=""></dt>
+                <dd>歌曲识别</dd>
+            </dl>
+            <dl>
+                <dt><img src="static/images/case1_05.jpg" alt=""></dt>
+                <dd>说话人年龄性别识别</dd>
+            </dl>
+        </div>
+    </div>
+
+
+</div>
+<!-- 新闻列表的版心部分 -->
+    <div class="news_con">
+<!-- 最左侧的盒子 -->
+        <div class="news_l">
+            <h3 class="news_title">论坛</h3>
+            <ul class="news_list">
+                <li>
+                    <a>语音识别能为我们带来什么好处？</a>
+                    <span>1998-09-15</span>
+                </li>
+                <li>
+                    <a>语音识别竟然还有这功能...</a>
+                    <span>1998-09-15</span>
+                </li>
+                <li>
+                    <a>震惊！一小伙深夜在电脑屏幕前狂笑，原因竟是...</a>
+                    <span>1998-09-15</span>
+                </li>
+                <li>
+                    <a>震惊！一小伙深夜在电脑屏幕前狂笑，原因竟是...</a>
+                    <span>1998-09-15</span>
+                </li>
+                <li>
+                    <a>震惊！一小伙深夜在电脑屏幕前狂笑，原因竟是...</a>
+                    <span>1998-09-15</span>
+                </li>
+                <li>
+                    <a>震惊！一小伙深夜在电脑屏幕前狂笑，原因竟是...</a>
+                    <span>1998-09-15</span>
+                </li>
+            </ul>
+
+        </div>
+<!-- 中间的盒子-->
+        <div class="news_c">
+            <h3 class="news_title">公告</h3>
+            <p class="txt1">太有趣了，99%的人看了都会笑!快转发给你身边的朋友...</p>
+            <p class="txt2">太有趣了，99%的人看了都会笑!快转发给你身边的朋友...</p>
+        </div>
+<!-- 右边的盒子 -->
+        <div class="news_r">
+            <h3 class="news_title">今日上新</h3>
+            <p class="txt3">新功能！新功能它来了</p>
+            <a href="#"><img src="./images/btn_img_05.jpg" alt=""></a>
+
+        </div>
+    </div>
+<!-- 市场项目那一部分 -->
+    <div class="case_con">
+        <h3>市场项目</h3>
+        <div class="case_box">
+            <dl>
+                <dt><img src="static/images/b1.jpg" alt=""></dt>
+                <dd>项目1：超级无敌大项目</dd>
+            </dl>
+            <dl>
+                <dt><img src="static/images/b2.jpg" alt=""></dt>
+                <dd>项目2：超级无敌宇宙第一大项目</dd>
+            </dl>
+            <dl>
+                <dt><img src="static/images/b3.jpg" alt=""></dt>
+                <dd>项目1：超级无敌牛的大项目</dd>
+            </dl>
+            <dl>
+                <dt><img src="static/images/b4.jpg" alt=""></dt>
+                <dd>不知道写什么了</dd>
+            </dl>
+        </div>
+    </div>
+<!-- 产品中心那一部分的平铺-->
+    <div id="links">
+<!-- 这个顺序引入更规范 -->
+        <div class="links_con">
+<!-- 版心部分 -->
+<!-- 左边的盒子 -->
+            <div class="links_l">
+                <h3 class="links_title">产品中心</h3>
+                <ul class="links_list">
+                    <li>
+                        <a href="#">快写完了1</a>
+                    </li>
+                    <li>
+                        <a href="#">快写完了1</a>
+                    </li>
+                    <li>
+                        <a href="#">快写完了1</a>
+                    </li>
+                    <li>
+                        <a href="#">快写完了5</a>
+                    </li>
+                    <li>
+                        <a href="#">快写完了5</a>
+                    </li>
+                    <li>
+                        <a href="#">快写完了1</a>
+                    </li>
+                    <li>
+                        <a href="#">快写完了1</a>
+                    </li>
+                    <li>
+                        <a href="#">快写完了1</a>
+                    </li>
+                    <li>
+                        <a href="#">快写完了5</a>
+                    </li>
+                    <li>
+                        <a href="#">快写完了5</a>
+                    </li>
+                    <li>
+                        <a href="#">快写完了1</a>
+                    </li>
+                    <li>
+                        <a href="#">快写完了1</a>
+                    </li>
+                    <li>
+                        <a href="#">快写完了1</a>
+                    </li>
+                </ul>
+            </div>
+<!-- 中间的盒子 -->
+            <div class="links_c">
+                <h3 class="links_title">产品中心</h3>
+                <ul class="links_list">
+                    <li>
+                        <a href="#">快写完了1</a>
+                    </li>
+                    <li>
+                        <a href="#">快写完了1</a>
+                    </li>
+                    <li>
+                        <a href="#">快写完了1</a>
+                    </li>
+                    <li>
+                        <a href="#">快写完了1</a>
+                    </li>
+                </ul>
+            </div>
+<!-- 右边的盒子 -->
+            <div class="links_r">
+                <h3 class="links_title">营销网络</h3>
+                <div class="map">
+                    <img src="static/images/QQ.png">
+                </div>
+            </div>
+        </div>
+
+    </div>
+<!-- 页脚 -->
+    <div class="footer_con">
+<!-- 页脚左边的盒子 -->
+        <p class="footer_l">
+            <a href="#">友情连接</a>
+            <a href="#">联系我们</a>
+            <a href="#">官方QQ群</a>
+            <a href="#" class="footer-right">真厉害</a>
+        </p>
+<!-- 页脚右边的盒子 -->
+        <p class="footer_r">
+            请联系我们：656521321351
+        </p>
+    </div>
+
+</body>
 
   
 {% endblock %}

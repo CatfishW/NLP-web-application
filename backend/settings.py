@@ -81,7 +81,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'blogsystem',
         'USER': 'root',
+
         'PASSWORD': 'zys112900',
+
         'HOST': '127.0.0.1',  # 默认为 'localhost'
         'PORT': '1129',  # 默认为 '3306'
     }
