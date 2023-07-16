@@ -7,15 +7,16 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from stt_realtime_api_helper import stt_api_get_result
 from tts_api_helper import tts_api_get_result
+from song_rec_api_helper import song_rec_get_result
 import os
 import time
-# Create your views here.
 # 讯飞开放平台相关信息
-APPID = '5f14f0a0'  # 到控制台语音听写页面获取
-APIKey = '617fc1020aebdd37d3b48adb8bdaf26a'  # 到控制台语音听写页面获取
-APISecret = '1df0512e0ddbffe279927aec1dbdf82d'  # 注意不要与APIkey写反
+APPID = '5f14f0a0'  
+APIKey = '617fc1020aebdd37d3b48adb8bdaf26a'  
+APISecret = '1df0512e0ddbffe279927aec1dbdf82d'  
 text_file = './data.txt'  # 用于存储听写后的文本
-
+APIKey_song_recognition = "4c66ea6f38104e88cb50b4d7e0f73c92"  # 开放平台接口秘钥，到控制台语音扩展歌曲识别页面获取
+url = "http://webqbh.xfyun.cn/v1/service/v1/qbh"  # 歌曲识别接口地址
 def index(request):
     return render(request, 'home.html')
 @csrf_exempt
@@ -119,6 +120,24 @@ def voice_generation(request):
     tts_api_get_result(APPID, APIKey, APISecret, TEXT, tts_file)  # 调用合成模块并将结果保存到音频文件中
     result = {'result': tts_file_post}
     return render(request,'voice_generation.html', result)  # 页面请求音频文件
+
+@csrf_exempt
+def song_recognition(request):
+    if request.method == 'GET':
+        return render(request,'song_recognition.html')
+    file = request.FILES['file']  # 获取上传的音频文件
+    file_path = os.path.join('recognition_result', 'recognition'+file.name)  # 替换为目标路径
+    with open(file_path, 'wb') as destination_file:
+        for chunk in file.chunks():
+            destination_file.write(chunk)
+    if not file:
+        return render(request,'song_recognition.html')
+    else:
+        srclass = song_rec_get_result(url, APPID, APIKey_song_recognition, file_path)  # 歌曲识别接口调用模块
+        result = srclass.call_url()  # 获取歌曲识别结果及结果解析
+        result = {'result': result}
+        print(result)
+        return render(request,'song_recognition.html', result)
     
 
 

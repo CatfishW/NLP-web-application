@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% block title %}歌曲识别{% endblock %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <title>歌曲识别</title>
+    <style>
+        .container{
+        width:48%;float:left
+
+        }
+
+     @media (max-width:500px){
+           .container{
+        width:100%;float:left
+
+        }
+     }
+     .buttons1{
+     margin-right:10%;margin-top:20px;font-size: 20px;padding: 6px 10px;cursor: pointer;background-color: white;color: blue;
+        border: 1px solid #555555;border-radius: 5px;float:left;}
+     .buttons2{
+     margin-right:10%;margin-top:20px;font-size: 20px;padding: 6px 10px;cursor: pointer;background-color: white;color: blue;
+        border: 1px solid #555555;border-radius: 5px;float:right;}
+
+
+
+
+
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div>
+        <h1 style="text-align:center">
+            <img alt="song" src="../static/images/song.png" width="120" height="120">
+            歌曲识别能力演示
+        </h1>
+        <p style="text-align:center">
+            歌曲识别技术分为歌曲原声识别以及哼唱识别。
+            歌曲原声识别通过听筒收集音乐播放信息，生成音频指纹，在曲库中识别到对应的歌曲。
+            哼唱识别通过用户对着话筒哼唱小段歌曲，系统自动识别并检索出所哼唱的歌曲。
+        </p>
+    </div>
+</header>
+<br/>
+<br/>
+<br/>
+
+<div class="container">
+
+    <!--上传文件-->
+    <form method="POST" id="upload" enctype="multipart/form-data">
+        <h2>请选择需要识别歌曲的wav音频文件</h2>
+        <br/>
+        <input type="file" name="file" id="pic" accept=".wav" class="buttons1" required>
+
+        <input type="submit" value="开始识别" onclick="uploadPic()" class="buttons2">
+        <span class="showUrl"></span>
+        <img src="" class="showPic" alt="">
+    </form>
+
+    <div style="clear:both;"></div>
+
+</div>
+
+<div style="width:48%;float:left"><h2>歌曲识别结果</h2>
+
+    <div style="border:1px solid #ddd;min-height: 400px;padding: 8px;">
+        {% if result %}
+        <h3 style="font-size: 20px "> 识别到的歌曲（按匹配概率降序）如下：</h3>
+        <table width="500" border="6" cellpadding="8">
+            <tr>
+                <th align="center">序号</th>
+                <th align="center">歌曲名</th>
+                <th align="center">歌手</th>
+                <th align="center">开始时间</th>
+<!--                <th align="center">结束时间</th>-->
+            </tr>
+
+            <tr>
+
+                <td align="center">{{result.song}}</td>
+                <td align="center">{{result.singer}}</td>
+                <td align="center">{{result.start_time}}</td>
+            </tr>
+
+        </table>
+        {% endif %}
+    </div>
+
+    <div style="clear:both;"></div>
+
+</div>
+
+<!--上传文件的JavaScript-->
+
+
+
+</body>
+{% endblock %}
