@@ -18,6 +18,8 @@ APISecret = '1df0512e0ddbffe279927aec1dbdf82d'
 text_file = './data.txt'  # 用于存储听写后的文本
 APIKey_song_recognition = "4c66ea6f38104e88cb50b4d7e0f73c92"  # 开放平台接口秘钥，到控制台语音扩展歌曲识别页面获取
 url = "http://webqbh.xfyun.cn/v1/service/v1/qbh"  # 歌曲识别接口地址
+age_label = {'0': '中年(12~40岁)', '1': '儿童（0~12岁）', '2': '老年（40岁以上）'}
+gender_label = {'0': '女性', '1': '男性'}
 def index(request):
     return render(request, 'home.html')
 @csrf_exempt
@@ -139,6 +141,24 @@ def song_recognition(request):
         result = {'result': result}
         print(result)
         return render(request,'song_recognition.html', result)
+@csrf_exempt
+def age_gender_recognition(request):
+    if request.method == 'GET':
+        return render(request,'age_gender_recognition.html')
+    file = request.FILES['file']  # 获取页面上传的音频文件
+    if not file:
+        return render(request,'age_gender_recognition.html')
+    file_path = os.path.join('recognition_result', 'age_gender_recognition_'+file.name)  # 替换为目标路径
+    with open(file_path, 'wb') as destination_file:
+        for chunk in file.chunks():
+            destination_file.write(chunk)
+    age_data, gender_data = age_gender_api_get_result(APPID, APIKey, APISecret, file_path)  # 调用语音识别年龄性别模块并获取结果
+    age_result = {'age_result':age_label[age_data[0]['age_type']]}  # 年龄结果解析
+    gender_result = {'gender_result':gender_label[gender_data[0]['gender_type']]}  # 性别结果解析
+    result = {'age_result':age_label[age_data[0]['age_type']],
+    'gender_result':gender_label[gender_data[0]['gender_type']]}
+    print(result)
+    return render(request,'age_gender_recognition.html', result)
     
 
 

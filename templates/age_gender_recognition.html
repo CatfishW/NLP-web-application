@@ -1,5 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+
+{% block title %}语音性别年龄识别{% endblock %}
+
+{% block content %}
 <head>
     <meta charset="UTF-8">
     <title>语音性别年龄识别</title>
@@ -32,7 +35,7 @@
 <header>
     <div>
         <h1 style="text-align:center">
-            <img alt="gar" src="{{url_for('static',filename='images/gar.png')}}" width="120" height="120">
+            <img alt="gar" src="../static/images/gar.png" width="120" height="120">
             语音性别年龄识别能力演示
         </h1>
         <p style="text-align:center">
@@ -48,7 +51,7 @@
 <div class="container">
 
     <!--上传文件-->
-    <form action="/" method="POST" id="upload" enctype="multipart/form-data">
+    <form method="POST" id="upload" enctype="multipart/form-data">
         <h2>请选择需要语音性别年龄识别的wav音频文件</h2>
         <br/>
         <input type="file" name="file" id="pic" accept=".wav" class="buttons1" required>
@@ -81,7 +84,7 @@
         var form = document.getElementById('upload'),
           formData = new FormData(form);
          $.ajax({
-            url:"/get_account",
+            url:"/",
             type:"post",
             data:formData,
             processData:false,
@@ -91,20 +94,17 @@
               alert("上传成功！");
              }
              console.log(res);
-             $("#pic").val("");
-             $(".showUrl").html(res);
-             $(".showPic").attr("src",res);
             },
             error:function(err){
              alert("网络连接失败,稍后重试",err);
             }
 
          })
-      }
+         }
 
 
 
 </script>
 
 </body>
-</html>
+{% endblock %}
