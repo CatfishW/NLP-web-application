@@ -1,0 +1,138 @@
+@charset "utf-8";
+
+/* 公共区域版心宽度一样，左右居中 */
+
+
+/* .header-wrap {
+    width: 1100px;
+    height: 62px;
+    margin: 0 auto;
+} */
+
+.header_con {
+    width: 100px;
+    height: 100px;
+     /*background: pink;*/
+    /* 左右居中 */
+    margin: 0 auto;
+}
+
+.header_con h1 {
+    width: 604px;
+    height: 66px;
+    /* background: orange; */
+    float: left;
+    padding: 34px 0 0 20px;
+}
+
+.header_con form {
+    width: 227px;
+    height: 61px;
+    /* background: orangered; */
+    float: right;
+    padding-top: 39px;
+    padding-right: 21px;
+}
+
+.header_con .search {
+    width: 195px;
+    height: 26px;
+    background: #f1f1f1;
+    border: 1px solid #e5e5e5;
+    /* 清除右侧边框 */
+    border-right: none;
+    float: left;
+    color: #888888;
+}
+
+.header_con .btn {
+    width: 30px;
+    height: 26px;
+    border: none;
+    background: #f1f1f1 url("../images/search_03.jpg") no-repeat center;
+}
+
+.header_con form div {
+    width: 30px;
+    height: 26px;
+    border: 1px solid #e5e5e5;
+    border-left: none;
+    float: left;
+    /* 给btn套盒子的时候也要加浮动 */
+}
+
+#nav {
+    height: 58px;
+    background: black;
+}
+
+#nav .nav_con {
+    width: 1002px;
+    height: 58px;
+    background: black;
+    margin: 0 auto;
+}
+
+
+/* 导航横向排列 */
+
+#nav .nav_con li {
+    width: 118px;
+    height: 58px;
+    float: left;
+    background: black;
+    /* 左右居中 */
+    text-align: center;
+    /* 上下居中 */
+    line-height: 58px;
+    border-left: 1px solid #4a4a4a;
+    font-size: 12px;
+}
+
+.nav_con li a {
+    color: white;
+}
+
+.margin-left {
+    margin-left: 25px;
+    border-left: none!important;
+}
+
+
+/* 公共样式的footer */
+
+.footer_con {
+    height: 82px;
+    /* background: #cccccc; */
+}
+
+.footer_con .footer_l {
+    height: 58px;
+    float: left;
+    /* background: red; */
+    padding-top: 24px;
+}
+
+.footer_con .footer_l a {
+    font-size: 12px;
+    float: left;
+    color: #868686;
+    border-right: 1px solid #868686;
+    /* padding:字体和边框的距离哈 */
+    padding: 0 7px;
+    padding-left: 15px;
+}
+
+.footer_con .footer_l .footer-right {
+    border-right: none!important;
+}
+
+.footer_con .footer_r {
+    height: 57px;
+    color: #8a8a8a;
+    font-size: 12px;
+    padding-top: 25px;
+    /* background: pink; */
+    padding-right: 21px;
+    float: right;
+}

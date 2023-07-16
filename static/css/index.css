@@ -1,0 +1,331 @@
+@charset "utf-8";
+
+/* 统一板块宽度和左右居中 */
+.fun_con,
+.news_con,
+.case_con,
+.links_con,
+.footer_con {
+    width: 1024px;
+    margin: 0 auto;
+}
+
+/* 自动轮播样式 */
+.banner-container{
+
+	width:1000px;
+	height:400px;
+	/* 轮播图居中 */
+	margin:1rem auto;
+	/* 隐藏超出展示容器的内容 */
+	overflow: hidden;
+	position: relative;
+}
+
+.banner-img-container {
+	width:1000px;
+	height:400px;
+	/*overflow: hidden;*/
+	position: absolute;
+	/* 开启弹性盒，让图片横向排列 */
+	display: flex;
+	animation: run 10s ease infinite;
+}
+
+.banner-img-container img{
+	width:1000px;
+	height:100%;
+}
+/* 轮播图关键帧 */
+/* 自动轮播 */
+@keyframes run {
+	0%,10%{
+		/* margin-left: 0; */
+		transform: translateX(0);
+	}
+	20%,30%{
+		/* margin-left: -1200px;; */
+		transform: translateX(-1000px);
+	}
+	40%,50%{
+		/* margin-left: -2400px; */
+		transform: translateX(-2000px);
+	}
+
+	/*60%,70%{*/
+	/*	!* margin-left: -3600px; *!*/
+	/*	transform: translateX(-3000px);*/
+	/*}*/
+	/*80%,90%{*/
+	/*	!* margin-left: -4800px; *!*/
+	/*	transform: translateX(-4000px);*/
+	/*}*/
+	100%{
+		/* margin-left: 0; */
+		transform: translateX(0);
+	}
+}
+<!-- 功能-->
+.fun_con {
+    height: 304px;
+    /* background: goldenrod; */
+}
+.fun_con h3 {
+    font-weight: bold;
+    font-size: 24px;
+    color: #3f434f;
+    margin: auto;
+    /* background: pink; */
+    padding: 28px 0 18px 22px;
+}
+
+
+.fun_con .fun_box {
+    height: 178px;
+    margin: 0 auto
+    /* background: orange; */
+}
+
+.fun_box dl {
+    width: 210px;
+    /* 这是由图片尺寸为210得出的，这样文本就会屈居于一处 */
+    /* background: burlywood; */
+    float: left;
+    margin: 0 20px;
+}
+
+/* 这里很重要！一定要设置宽高，也就是图片尺寸得出，这样以后图片更换，结构就不会乱！ */
+
+.fun_box dl dt {
+    width: 210px;
+    height: 136px;
+}
+
+.fun_box dl dd {
+    font-size: 18px;
+    color: #4f4f4f;
+    line-height: 24px;
+    margin-top: 13px;
+    text-align: center;
+}
+
+
+/* 上面给dt这个容器指定了宽高，现在让img跟随这个容器的宽高！！ */
+
+.fun_box dl dt img {
+    width: 100%;
+    height: 100%;
+}
+
+.news_con {
+    height: 243px;
+    background: white;
+}
+
+.news_title {
+    /* background: cadetblue; */
+    font-weight: bold;
+    font-size: 24px;
+    color: #3f434f;
+    line-height: 18px;
+    padding-top: 36px;
+}
+
+.news_list {
+    /* background: cornflowerblue; */
+    margin-top: 23px;
+}
+
+.news_list li {
+    width: 437px;
+    height: 25px;
+    background: url("../images/ico_05.jpg") no-repeat left;
+    padding-left: 14px;
+    /* margin-top: 23px;不能给li加哦 要给他爹，不然每个儿子顶部都会空出来*/
+}
+
+.news_list li a {
+    float: left;
+    font-size: 12px;
+    color: #565656;
+    line-height: 25px;
+}
+
+.news_list li span {
+    float: right;
+    color: #9a9a9a;
+    font-size: 12px;
+}
+
+.news_l {
+    width: 480px;
+    height: 243px;
+    /* background: rebeccapurple; */
+    float: left;
+    padding-left: 21px;
+    margin-right: 45px;
+}
+
+.news_c {
+    width: 194px;
+    height: 243px;
+    background: #f1f1f1;
+    float: left;
+    padding: 0 27px 0 20px;
+    margin-right: 60px;
+}
+
+.news_c .txt1 {
+    font-size: 12px;
+    color: #555555;
+    line-height: 25px;
+    margin-top: 34px;
+    /* 行高自己去量哦 */
+}
+
+.news_c .txt2 {
+    font-size: 12px;
+    color: #979797;
+    line-height: 25px;
+    margin-top: 15 px;
+    /* 行高自己去量哦 */
+}
+
+.news_r {
+    width: 180px;
+    height: 243px;
+    background: #fbfbfb url("../images/ma_05.jpg") no-repeat right bottom;
+    float: left;
+    padding: 0 38px 0 24px;
+}
+
+.news_r .txt3 {
+    font-size: 12px;
+    color: #585858;
+    line-height: 24px;
+    margin: 21px 0 22px 0;
+}
+
+.case_con {
+    height: 304px;
+    /* background: goldenrod; */
+}
+.case_con h3 {
+    font-size: 24px;
+    color: #3f434f;
+    font-weight: bold;
+    /* background: pink; */
+    padding: 28px 0 18px 22px;
+}
+
+
+.case_con .case_box {
+    height: 240px;
+    /* background: orange; */
+}
+
+.case_box dl {
+    width: 210px;
+    /* 这是由图片尺寸为210得出的，这样文本就会屈居于一处 */
+    /* background: burlywood; */
+    float: left;
+    margin: 0 20px;
+}
+
+/* 这里很重要！一定要设置宽高，也就是图片尺寸得出，这样以后图片更换，结构就不会乱！ */
+
+.case_box dl dt {
+    width: 210px;
+    height: 136px;
+}
+
+.case_box dl dd {
+    font-size: 12px;
+    text-align: center;
+    color: #4f4f4f;
+    line-height: 24px;
+    margin-top: 13px;
+}
+
+
+/* 上面给dt这个容器指定了宽高，现在让img跟随这个容器的宽高！！ */
+
+.case_box dl dt img {
+    width: 100%;
+    height: 100%;
+}
+
+
+#links {
+    background: #e5e5e5;
+
+}
+
+.links_con {
+    height: 250px;
+    /*   */
+}
+
+.links_con .links_title {
+    color: #5d5d5d;
+    line-height: 16px;
+    border-bottom: 1px solid #c1c1c1;
+    padding: 31px 0 11px 13px;
+}
+
+.links_con .links_l {
+    width: 452px;
+    height: 250px;
+    background: #e5e5e5;
+    float: left;
+    margin-left: 20px;
+
+}
+
+.links_con .links_list {
+    /* background: cornsilk; */
+    height: 170px;
+    padding-left: 5px;
+    padding-top: 15px;
+}
+
+.links_con .links_list li {
+    width: 136px;
+    height: 24px;
+    background: url("../images/btn_img_13.jpg") no-repeat left center;
+    font-size: 12px;
+    line-height: 24px;
+    padding-left: 13px;
+    float: left;
+}
+
+.links_con .links_list li a {
+    color: #5f5f5f;
+}
+
+.links_con .links_c {
+    width: 153px;
+    height: 250px;
+    background: #e5e5e5;
+    float: left;
+    margin: 0 50px;
+}
+
+.links_con .links_c .links_list li {
+    width: 130px;
+}
+
+.links_con .links_r {
+    width: 256px;
+    height: 250px;
+    background: #e5e5e5;
+    float: left;
+}
+
+.links_con .links_r .map {
+    text-align: center;
+    padding-top: 11px;
+}
+.map img{
+    width: 133px;
+}
