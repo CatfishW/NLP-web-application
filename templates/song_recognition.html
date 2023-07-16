@@ -1,102 +1,338 @@
 {% extends 'base.html' %}
 {% block title %}歌曲识别{% endblock %}
 {% block content %}
+
 <head>
     <meta charset="UTF-8">
     <title>歌曲识别</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/test.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/test2.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/test3.css">
+
+
     <style>
-        .container{
-        width:48%;float:left
-
+        .modal {
+            display: none;
+            /* 默认隐藏 */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            /* 半透明背景 */
         }
 
-     @media (max-width:500px){
-           .container{
-        width:100%;float:left
-
+        .modal-content {
+            background-color: #fff;
+            margin: 10% auto;
+            padding: 20px;
+            width: 60%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
-     }
-     .buttons1{
-     margin-right:10%;margin-top:20px;font-size: 20px;padding: 6px 10px;cursor: pointer;background-color: white;color: blue;
-        border: 1px solid #555555;border-radius: 5px;float:left;}
-     .buttons2{
-     margin-right:10%;margin-top:20px;font-size: 20px;padding: 6px 10px;cursor: pointer;background-color: white;color: blue;
-        border: 1px solid #555555;border-radius: 5px;float:right;}
+
+        .close {
+            float: right;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        h2 {
+            margin-top: 0;
+        }
 
 
 
 
 
+
+        body {
+            background-color: rgb(249, 250, 255);
+        }
+
+        .container1 {
+            width: 100%;
+            float: left;
+            margin-top: -50px;
+        }
+
+        .container2 {
+            width: 100%;
+            float: left;
+            margin-top: 50px;
+        }
+
+        .container3 {
+            width: 100%;
+            float: left;
+            margin-top: -50px;
+        }
+
+        @media (max-width:500px) {
+            .container {
+                width: 100%;
+                float: left
+            }
+        }
+
+        .buttons1 {
+            margin-right: 10%;
+            margin-top: 20px;
+            font-size: 20px;
+            padding: 6px 10px;
+            cursor: pointer;
+            background-color: white;
+            color: blue;
+            border: 1px solid #555555;
+            border-radius: 5px;
+            float: left;
+        }
+
+        .buttons2 {
+            margin-right: 10%;
+            margin-top: 20px;
+            font-size: 20px;
+            padding: 6px 10px;
+            cursor: pointer;
+            background-color: white;
+            color: blue;
+            border: 1px solid #555555;
+            border-radius: 5px;
+            float: right;
+        }
+
+        .buttons3 {
+            margin-right: 20%;
+            margin-top: 20px;
+            font-size: 20px;
+            padding: 6px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            float: right;
+        }
+
+        .buttons4 {
+            margin-left: 15%;
+            margin-top: 20px;
+            font-size: 20px;
+            padding: 6px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            float: left
+        }
+
+
+        /* 选择文件 */
+        .file-upload {
+            position: relative;
+            /* display: inline-block; */
+            display: block;
+        }
+
+        .file-input {
+            position: absolute;
+            left: -9999px;
+            display: block;
+        }
+
+        .file-zys {
+            display: block;
+            margin: 0 auto;
+            height: 40px;
+            width: 160px;
+            display: flex;
+            justify-content: center;
+            /* 水平居中 */
+            align-items: center;
+            /* 垂直居中 */
+            text-align: justify;
+            margin-bottom: 20px;
+            font-family: "Microsoft YaHei", sans-serif;
+            /* 首选字体为微软雅黑，如果系统不支持，则使用 sans-serif 作为备选字体 */
+            font-weight: bold;
+            /* 加粗 */
+        }
+
+        .file-zys2 {
+            display: block;
+            margin: 0 auto;
+            height: 40px;
+            width: 160px;
+            display: flex;
+            justify-content: center;
+            /* 水平居中 */
+            align-items: center;
+            /* 垂直居中 */
+            text-align: justify;
+            font-family: "Microsoft YaHei", sans-serif;
+            /* 首选字体为微软雅黑，如果系统不支持，则使用 sans-serif 作为备选字体 */
+            font-weight: bold;
+            /* 加粗 */
+        }
     </style>
 </head>
 
 <body>
 
-<header>
-    <div>
-        <h1 style="text-align:center">
-            <img alt="song" src="../static/images/song.png" width="120" height="120">
-            歌曲识别能力演示
-        </h1>
-        <p style="text-align:center">
-            歌曲识别技术分为歌曲原声识别以及哼唱识别。
-            歌曲原声识别通过听筒收集音乐播放信息，生成音频指纹，在曲库中识别到对应的歌曲。
-            哼唱识别通过用户对着话筒哼唱小段歌曲，系统自动识别并检索出所哼唱的歌曲。
-        </p>
+    <header>
+        <div>
+            <h1 style="text-align:center">
+                <img alt="song" src="../static/images/song.png" width="120" height="120">
+                歌曲识别能力演示
+            </h1>
+            <p style="text-align:center">
+                歌曲识别技术分为歌曲原声识别以及哼唱识别。
+                歌曲原声识别通过听筒收集音乐播放信息，生成音频指纹，在曲库中识别到对应的歌曲。
+                哼唱识别通过用户对着话筒哼唱小段歌曲，系统自动识别并检索出所哼唱的歌曲。
+            </p>
+        </div>
+    </header>
+    <br />
+
+
+
+
+
+
+    <!-- zys -->
+    <div class="container1">
+        <!--上传文件-->
+        <form method="POST" id="upload" enctype="multipart/form-data">
+            <div class="container">
+                <h2 class="section-title">
+                    <span>
+                        产品体验
+                    </span>
+                </h2>
+                <div class="service-item-demo demo-iat">
+                    <div class="demo-content">
+                        <div class="taste-left">
+                            <div class="taste-left-header">语音输入</div>
+                            <div class="taste-left-body" style="width: 500px;">
+                                <div class="ex-speaker-scene">
+                                    <div class="language-list-ul" style="display: none;">
+                                        <div class="language-list-ul-div"></div>
+                                        <ul class="language-list" style="display: flex;"></ul>
+                                    </div>
+                                </div>
+                                <div class="language-image-box" style="display: none;">
+                                    <div class="taste-content" style="display: none;">
+                                        <button class="taste-button ready-button file-zys" type="button"
+                                            id="taste_button">开始识别</button>
+                                    </div>
+                                    <div class="language-p">
+                                        <p>点击“开始识别”开始录音，请对我说你想说的话，我可以识别你说的内容哦~</p>
+                                        <p>请允许浏览器获取麦克风权限</p>
+                                    </div>
+                                </div>
+                                <div class="start-taste flex-display-1">
+                                    <div class="start-taste-left">
+                                        <div class="time-box" style="display: none;"><span class="start-taste-line">
+                                                <hr class="hr1">
+                                                <hr class="hr2">
+                                                <hr class="hr3">
+                                                <hr class="hr4">
+                                                <hr class="hr5">
+                                                <hr class="hr6">
+                                                <hr class="hr7">
+                                                <hr class="hr8">
+                                                <hr class="hr9">
+                                                <hr class="hr10">
+                                            </span><span class="total-time"><span class="used-time">00: 00</span><span>/
+                                                    01: 00</span></span>
+                                        </div>
+                                        <div class="start-taste-button">
+                                            <!-- zys -->
+                                            <input onchange="handleFileSelect(event)" type="file" onclick="activate1"
+                                                name="file" id="pic" accept="audio/mpeg, audio/wav,audio/mpeg" class="file-input" />
+                                            <label for="pic"
+                                                class="file-zys taste-button taste-ml160">选&nbsp;择&nbsp;文&nbsp;件</label>
+
+                                            <!-- <input type="file" name="file" id="pic" accept=".mp3" class="buttons1" required> -->
+
+                                            <input id="anotherBtn"  type="submit" value="开&nbsp;始&nbsp;识&nbsp;别"
+                                                onclick="uploadPic()" class="file-zys2 taste-button taste-ml160"
+                                                style=" font-size:16px">
+                                            <span class="showUrl"></span>
+                                            <img src="" class="showPic" alt="">
+
+
+                                            <!-- <button class="taste-button start-button taste-ml160" type="button">开始识别</button> -->
+
+                                            <div class="language-p">
+                                                <p>点击“选择文件”，可选取对应的.mp3格式的音频文件</p>
+                                                <p style="margin-bottom: 90px;">点击“开始识别”，即可完成语音识别分析”</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal">
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <h2>上传成功</h2>
+                                <!-- <p>上传成功</p> -->
+                            </div>
+                        </div>
+
+                        <div class="taste-right">
+                            <div class="taste-right-header">识别结果</div>
+                            <!-- <div class="taste-right-body" id="result_output"></div> -->
+
+                            <div style="border:1px solid #ddd;min-height: 300px;padding: 8px;min-width: 500px;background-color: #fff;">
+                                {% if result %}
+                                <h3 style="font-size: 20px "> 识别到的歌曲（按匹配概率降序）如下：</h3>
+                                <table width="500" border="6" cellpadding="8">
+                                    <tr>
+                                        <th align="center">序号</th>
+                                        <th align="center">歌曲名</th>
+                                        <th align="center">歌手</th>
+                                        <th align="center">开始时间</th>
+                                        <!--                <th align="center">结束时间</th>-->
+                                    </tr>
+                    
+                                    <tr>
+                    
+                                        <td align="center">{{result.song}}</td>
+                                        <td align="center">{{result.singer}}</td>
+                                        <td align="center">{{result.start_time}}</td>
+                                    </tr>
+                    
+                                </table>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
-</header>
-<br/>
-<br/>
-<br/>
 
-<div class="container">
 
-    <!--上传文件-->
-    <form method="POST" id="upload" enctype="multipart/form-data">
-        <h2>请选择需要识别歌曲的wav音频文件</h2>
-        <br/>
-        <input type="file" name="file" id="pic" accept=".wav" class="buttons1" required>
 
-        <input type="submit" value="开始识别" onclick="uploadPic()" class="buttons2">
-        <span class="showUrl"></span>
-        <img src="" class="showPic" alt="">
-    </form>
 
-    <div style="clear:both;"></div>
 
-</div>
 
-<div style="width:48%;float:left"><h2>歌曲识别结果</h2>
 
-    <div style="border:1px solid #ddd;min-height: 400px;padding: 8px;">
-        {% if result %}
-        <h3 style="font-size: 20px "> 识别到的歌曲（按匹配概率降序）如下：</h3>
-        <table width="500" border="6" cellpadding="8">
-            <tr>
-                <th align="center">序号</th>
-                <th align="center">歌曲名</th>
-                <th align="center">歌手</th>
-                <th align="center">开始时间</th>
-<!--                <th align="center">结束时间</th>-->
-            </tr>
 
-            <tr>
 
-                <td align="center">{{result.song}}</td>
-                <td align="center">{{result.singer}}</td>
-                <td align="center">{{result.start_time}}</td>
-            </tr>
 
-        </table>
-        {% endif %}
-    </div>
 
-    <div style="clear:both;"></div>
 
-</div>
 
-<!--上传文件的JavaScript-->
 
+
+
+
+    <!--上传文件的JavaScript-->
+    <script>
+
+    </script>
 
 
 </body>

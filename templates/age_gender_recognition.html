@@ -3,108 +3,389 @@
 {% block title %}语音性别年龄识别{% endblock %}
 
 {% block content %}
+
 <head>
     <meta charset="UTF-8">
     <title>语音性别年龄识别</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/test.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/test2.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/test3.css">
+
+
     <style>
-        .container{
-        width:48%;float:left
-
+        .modal {
+            display: none;
+            /* 默认隐藏 */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            /* 半透明背景 */
         }
 
-     @media (max-width:500px){
-           .container{
-        width:100%;float:left
-
+        .modal-content {
+            background-color: #fff;
+            margin: 10% auto;
+            padding: 20px;
+            width: 60%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
-     }
-     .buttons1{
-     margin-right:10%;margin-top:20px;font-size: 20px;padding: 6px 10px;cursor: pointer;background-color: white;color: blue;
-        border: 1px solid #555555;border-radius: 5px;float:left;}
-     .buttons2{
-     margin-right:10%;margin-top:20px;font-size: 20px;padding: 6px 10px;cursor: pointer;background-color: white;color: blue;
-        border: 1px solid #555555;border-radius: 5px;float:right;}
+
+        .close {
+            float: right;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        h2 {
+            margin-top: 0;
+        }
 
 
 
+        body {
+            background-color: rgb(249, 250, 255);
+        }
+
+        .container1 {
+            width: 100%;
+            float: left;
+            margin-top: -50px;
+        }
+
+        .container2 {
+            width: 100%;
+            float: left;
+            margin-top: 50px;
+        }
+
+        .container3 {
+            width: 100%;
+            float: left;
+            margin-top: -50px;
+        }
+
+        @media (max-width:500px) {
+            .container {
+                width: 100%;
+                float: left
+            }
+        }
+
+        .buttons1 {
+            margin-right: 10%;
+            margin-top: 20px;
+            font-size: 20px;
+            padding: 6px 10px;
+            cursor: pointer;
+            background-color: white;
+            color: blue;
+            border: 1px solid #555555;
+            border-radius: 5px;
+            float: left;
+        }
+
+        .buttons2 {
+            margin-right: 10%;
+            margin-top: 20px;
+            font-size: 20px;
+            padding: 6px 10px;
+            cursor: pointer;
+            background-color: white;
+            color: blue;
+            border: 1px solid #555555;
+            border-radius: 5px;
+            float: right;
+        }
+
+        .buttons3 {
+            margin-right: 20%;
+            margin-top: 20px;
+            font-size: 20px;
+            padding: 6px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            float: right;
+        }
+
+        .buttons4 {
+            margin-left: 15%;
+            margin-top: 20px;
+            font-size: 20px;
+            padding: 6px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            float: left
+        }
+
+
+        /* 选择文件 */
+        .file-upload {
+            position: relative;
+            /* display: inline-block; */
+            display: block;
+        }
+
+        .file-input {
+            position: absolute;
+            left: -9999px;
+            display: block;
+        }
+
+        .file-zys {
+            display: block;
+            margin: 0 auto;
+            height: 40px;
+            width: 160px;
+            display: flex;
+            justify-content: center;
+            /* 水平居中 */
+            align-items: center;
+            /* 垂直居中 */
+            text-align: justify;
+            margin-bottom: 20px;
+            font-family: "Microsoft YaHei", sans-serif;
+            /* 首选字体为微软雅黑，如果系统不支持，则使用 sans-serif 作为备选字体 */
+            font-weight: bold;
+            /* 加粗 */
+        }
+
+        .file-zys2 {
+            display: block;
+            margin: 0 auto;
+            height: 40px;
+            width: 160px;
+            display: flex;
+            justify-content: center;
+            /* 水平居中 */
+            align-items: center;
+            /* 垂直居中 */
+            text-align: justify;
+            font-family: "Microsoft YaHei", sans-serif;
+            /* 首选字体为微软雅黑，如果系统不支持，则使用 sans-serif 作为备选字体 */
+            font-weight: bold;
+            /* 加粗 */
+        }
     </style>
 </head>
 
 <body>
 
-<header>
-    <div>
-        <h1 style="text-align:center">
-            <img alt="gar" src="../static/images/gar.png" width="120" height="120">
-            语音性别年龄识别能力演示
-        </h1>
-        <p style="text-align:center">
-            语音性别年龄识别是对说话者的年龄大小以及性别属性进行分析，
-            可以通过收到的音频数据判定发音人的性别（男，女）及年龄范围（小孩，中年，老人）。
-        </p>
+    <header>
+        <div>
+            <h1 style="text-align:center">
+                <img alt="gar" src="../static/images/gar.png" width="120" height="120">
+                语音性别年龄识别能力演示
+            </h1>
+            <p style="text-align:center">
+                语音性别年龄识别是对说话者的年龄大小以及性别属性进行分析，
+                可以通过收到的音频数据判定发音人的性别（男，女）及年龄范围（小孩，中年，老人）。
+            </p>
+        </div>
+    </header>
+    <br />
+    <br />
+    <br />
+
+
+
+
+
+
+
+
+
+    <!-- zys -->
+    <div class="container1">
+        <!--上传文件-->
+        <form method="POST" id="upload" enctype="multipart/form-data">
+            <div class="container">
+                <h2 class="section-title">
+                    <span>
+                        产品体验
+                    </span>
+                </h2>
+                <div class="service-item-demo demo-iat">
+                    <div class="demo-content">
+                        <div class="taste-left">
+                            <div class="taste-left-header">语音输入</div>
+                            <div class="taste-left-body" style="width: 500px;">
+                                <div class="ex-speaker-scene">
+                                    <div class="language-list-ul" style="display: none;">
+                                        <div class="language-list-ul-div"></div>
+                                        <ul class="language-list" style="display: flex;"></ul>
+                                    </div>
+                                </div>
+                                <div class="language-image-box" style="display: none;">
+                                    <div class="taste-content" style="display: none;">
+                                        <button class="taste-button ready-button file-zys" type="button"
+                                            id="taste_button">开始识别</button>
+                                    </div>
+                                    <div class="language-p">
+                                        <p>点击“开始识别”开始录音，请对我说你想说的话，我可以识别你说的内容哦~</p>
+                                        <p>请允许浏览器获取麦克风权限</p>
+                                    </div>
+                                </div>
+                                <div class="start-taste flex-display-1">
+                                    <div class="start-taste-left">
+                                        <div class="time-box" style="display: none;"><span class="start-taste-line">
+                                                <hr class="hr1">
+                                                <hr class="hr2">
+                                                <hr class="hr3">
+                                                <hr class="hr4">
+                                                <hr class="hr5">
+                                                <hr class="hr6">
+                                                <hr class="hr7">
+                                                <hr class="hr8">
+                                                <hr class="hr9">
+                                                <hr class="hr10">
+                                            </span><span class="total-time"><span class="used-time">00: 00</span><span>/
+                                                    01: 00</span></span>
+                                        </div>
+                                        <div class="start-taste-button">
+                                            <!-- zys -->
+                                            <input onchange="handleFileSelect(event)" type="file" onclick="activate1"
+                                                name="file" id="pic" accept="audio/mpeg, audio/wav,audio/mpeg"
+                                                class="file-input" />
+                                            <label for="pic"
+                                                class="file-zys taste-button taste-ml160">选&nbsp;择&nbsp;文&nbsp;件</label>
+
+                                            <!-- <input type="file" name="file" id="pic" accept=".mp3" class="buttons1" required> -->
+
+                                            <input id="anotherBtn" disabled type="submit" value="开&nbsp;始&nbsp;识&nbsp;别"
+                                                onclick="uploadPic()" class="file-zys2 taste-button taste-ml160"
+                                                style=" font-size:14px">
+                                            <span class="showUrl"></span>
+                                            <img src="" class="showPic" alt="">
+
+
+                                            <!-- <button class="taste-button start-button taste-ml160" type="button">开始识别</button> -->
+
+                                            <div class="language-p">
+                                                <p>点击“选择文件”，可选取对应的.mp3格式的音频文件</p>
+                                                <p style="margin-bottom: 90px;">点击“开始识别”，即可完成语音识别分析”</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal">
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <h2>上传成功</h2>
+                                <!-- <p>上传成功</p> -->
+                            </div>
+                        </div>
+
+                        <div class="modal">
+                            <div class="modal-content">
+                              <span class="close">&times;</span>
+                              <h2>上传成功</h2>
+                              <!-- <p>上传成功</p> -->
+                            </div>
+                          </div>
+
+
+
+                        <div class="taste-right">
+                            <div class="taste-right-header">识别结果</div>
+                            <!-- <div class="taste-right-body" id="result_output"></div> -->
+
+                            <div id="zystarget"
+                                style="border:1px solid #ddd;min-height: 300px;padding: 8px;min-width: 500px;background-color: #fff;">
+                                {% if age_result %}
+                                <ul>
+                                    <li style="font-size: 20px ">识别出说话人的性别为：{{gender_result}}</li>
+                                    <br />
+                                    <li style="font-size: 20px ">识别出说话人的年龄段为：{{age_result}}</li>
+                                </ul>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </form>
     </div>
-</header>
-<br/>
-<br/>
-<br/>
 
-<div class="container">
 
-    <!--上传文件-->
-    <form method="POST" id="upload" enctype="multipart/form-data">
-        <h2>请选择需要语音性别年龄识别的wav音频文件</h2>
-        <br/>
-        <input type="file" name="file" id="pic" accept=".wav" class="buttons1" required>
 
-        <input type="submit" value="开始识别" onclick="uploadPic()" class="buttons2">
-        <span class="showUrl"></span>
-        <img src="" class="showPic" alt="">
-    </form>
 
-    <div style="clear:both;"></div>
 
-</div>
 
-<div style="width:48%;float:left"><h2>性别年龄识别结果</h2>
-    <div style="border:1px solid #ddd;min-height: 400px;padding: 8px;">
-        {% if age_result %}
-        <ul>
-            <li style="font-size: 20px ">识别出说话人的性别为：{{gender_result}}</li>
-            <br/>
-            <li style="font-size: 20px ">识别出说话人的年龄段为：{{age_result}}</li>
-        </ul>
-        {% endif %}
-    </div>
-    <div style="clear:both;"></div>
-</div>
 
-<!--上传文件的JavaScript-->
-<script type="text/javascript">
-      function uploadPic() {
-        var form = document.getElementById('upload'),
-          formData = new FormData(form);
-         $.ajax({
-            url:"/",
-            type:"post",
-            data:formData,
-            processData:false,
-            contentType:false,
-            success:function(res){
-             if(res){
-              alert("上传成功！");
-             }
-             console.log(res);
-            },
-            error:function(err){
-             alert("网络连接失败,稍后重试",err);
+
+
+
+
+
+
+
+
+    <!--上传文件的JavaScript-->
+    <script type="text/javascript">
+        function uploadPic() {
+            var form = document.getElementById('upload'),
+                formData = new FormData(form);
+            $.ajax({
+                url: "/",
+                type: "post",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (res) {
+                    if (res) {
+                        // alert("上传成功！");
+                        document.querySelector('.modal').classList.add('show');
+                        setTimeout(function () {
+                            document.querySelector('.modal').classList.remove('show');
+                        }, 15000);
+                    }
+                    console.log(res);
+                },
+                error: function (err) {
+                    alert("网络连接失败,稍后重试", err);
+                }
+
+            })
+        }
+
+
+
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            location.hash = "zystarget"
+            if (location.hash) {
+                var targetElement = document.querySelector(location.hash);
+                if (targetElement) {
+                    targetElement.scrollIntoView();
+                }
             }
-
-         })
-         }
+        });
 
 
 
-</script>
+        function handleFileSelect(event) {
+            var fileInput = event.target;
+            var startBtn = document.getElementById("anotherBtn");
+
+            if (fileInput.files && fileInput.files.length > 0) {
+                // 选择了文件，启用识别按钮
+                startBtn.disabled = false;
+            } else {
+                // 没有选择文件，禁用识别按钮
+                startBtn.disabled = true;
+            }
+        }
+
+    </script>
 
 </body>
 {% endblock %}
