@@ -7,6 +7,6 @@ python manage.py migrate
 ## STEP3
 python manage.py runserver
 ## STEP4
-copy and paste local server link to the server for demostration.
+copy and paste local server link to the browser for demostration.
 
 
